@@ -1331,6 +1331,7 @@ struct ImGuiContext
     ImDrawList              BackgroundDrawList;                 // First draw list to be rendered.
     ImDrawList              ForegroundDrawList;                 // Last draw list to be rendered. This is where we the render software mouse cursor (if io.MouseDrawCursor is set) and most debug overlays.
     ImGuiMouseCursor        MouseCursor;
+    int                     MergeSmallDrawCmdsMaxElem;          // Max number of elements in a ImDrawCmd to attempt small ImDrawCmd merging.
 
     // Drag and Drop
     bool                    DragDropActive;
@@ -1510,6 +1511,7 @@ struct ImGuiContext
         BackgroundDrawList._OwnerName = "##Background"; // Give it a name for debugging
         ForegroundDrawList._OwnerName = "##Foreground"; // Give it a name for debugging
         MouseCursor = ImGuiMouseCursor_Arrow;
+        MergeSmallDrawCmdsMaxElem = 120;
 
         DragDropActive = DragDropWithinSource = DragDropWithinTarget = false;
         DragDropSourceFlags = ImGuiDragDropFlags_None;
@@ -2394,6 +2396,9 @@ namespace ImGui
     inline void             DebugStartItemPicker()                                  { ImGuiContext& g = *GImGui; g.DebugItemPickerActive = true; }
 
 } // namespace ImGui
+
+// ImDrawList internals
+IMGUI_API void              ImDrawListMergeSmallDrawCmds(ImDrawList* draw_list, unsigned int max_triangles_for_merge);
 
 // ImFontAtlas internals
 IMGUI_API bool              ImFontAtlasBuildWithStbTruetype(ImFontAtlas* atlas);
