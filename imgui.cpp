@@ -10759,6 +10759,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
                 ImGui::BulletText("CellPaddingX: %.1f, CellSpacingX: %.1f/%.1f, OuterPaddingX: %.1f", table->CellPaddingX, table->CellSpacingX1, table->CellSpacingX2, table->OuterPaddingX);
                 ImGui::BulletText("HoveredColumnBody: %d, HoveredColumnBorder: %d", table->HoveredColumnBody, table->HoveredColumnBorder);
                 ImGui::BulletText("ResizedColumn: %d, ReorderColumn: %d, HeldHeaderColumn: %d", table->ResizedColumn, table->ReorderColumn, table->HeldHeaderColumn);
+                ImGui::BulletText("BgDrawChannels: %d/%d", 0, table->BgDrawChannelUnfrozen);
                 for (int n = 0; n < table->ColumnsCount; n++)
                 {
                     const ImGuiTableColumn* column = &table->Columns[n];
